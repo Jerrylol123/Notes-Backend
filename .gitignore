@@ -1,0 +1,39 @@
+## .NET / ASP.NET Core
+
+# Build output
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+*.rsuser
+
+# Rider
+.idea/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Logs
+*.log
+logs/
+
+# Environment / secrets
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
