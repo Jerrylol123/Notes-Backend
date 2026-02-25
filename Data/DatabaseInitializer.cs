@@ -14,20 +14,25 @@ public class DatabaseInitializer
 
     public async Task InitializeAsync()
     {
-        // Connect to master to create the database if it doesn't exist
-        var masterConnectionString = new SqlConnectionStringBuilder(_connectionString)
+        // Try to create the database if possible (works locally, skipped on hosted SQL like Somee.com)
+        try
         {
-            InitialCatalog = "master"
-        }.ConnectionString;
+            var masterConnectionString = new SqlConnectionStringBuilder(_connectionString)
+            {
+                InitialCatalog = "master"
+            }.ConnectionString;
 
-        using (var masterConnection = new SqlConnection(masterConnectionString))
-        {
+            using var masterConnection = new SqlConnection(masterConnectionString);
             await masterConnection.ExecuteAsync(@"
                 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'NotesDb')
                 BEGIN
                     CREATE DATABASE NotesDb;
                 END
             ");
+        }
+        catch
+        {
+            // Hosted environments (e.g. Somee.com) don't allow master access — database already exists
         }
 
         // Connect to NotesDb and create tables if they don't exist
