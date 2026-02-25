@@ -84,9 +84,16 @@ builder.Services.AddScoped<INoteRepository, NoteRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<INoteService, NoteService>();
 
-// Listen on PORT env var assigned by Render (falls back to 8080 locally)
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://+:{port}");
+// // Listen on PORT env var assigned by Render (falls back to 8080 locally)                                                                                  
+// var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";                                                                                           
+// builder.WebHost.UseUrls($"http://+:{port}");  
+
+// Listen on PORT env var when deployed on Render (locally uses launchSettings.json)
+var port = Environment.GetEnvironmentVariable("PORT");
+if (port != null)
+{
+    builder.WebHost.UseUrls($"http://+:{port}");
+}
 
 var app = builder.Build();
 
