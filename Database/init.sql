@@ -1,18 +1,13 @@
--- =============================================
--- Notes Application - Database Setup Script
 -- SQL Server
--- =============================================
 
--- Step 1: Create the database
+-- Create the database
 CREATE DATABASE NotesDb;
 GO
 
 USE NotesDb;
 GO
 
--- =============================================
--- Step 2: Create Users table
--- =============================================
+-- Create Users table
 CREATE TABLE Users (
     Id           INT IDENTITY(1,1) PRIMARY KEY,
     Username     NVARCHAR(100)  NOT NULL,
@@ -24,9 +19,7 @@ CREATE TABLE Users (
 CREATE INDEX IX_Users_Email ON Users(Email);
 GO
 
--- =============================================
--- Step 3: Create Notes table
--- =============================================
+-- Create Notes table
 CREATE TABLE Notes (
     Id        INT IDENTITY(1,1) PRIMARY KEY,
     UserId    INT            NOT NULL,

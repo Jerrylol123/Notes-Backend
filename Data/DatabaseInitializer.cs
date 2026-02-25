@@ -14,7 +14,7 @@ public class DatabaseInitializer
 
     public async Task InitializeAsync()
     {
-        // Step 1: Connect to master to create the database if it doesn't exist
+        // Connect to master to create the database if it doesn't exist
         var masterConnectionString = new SqlConnectionStringBuilder(_connectionString)
         {
             InitialCatalog = "master"
@@ -30,7 +30,7 @@ public class DatabaseInitializer
             ");
         }
 
-        // Step 2: Connect to NotesDb and create tables if they don't exist
+        // Connect to NotesDb and create tables if they don't exist
         using var connection = new SqlConnection(_connectionString);
 
         await connection.ExecuteAsync(@"
